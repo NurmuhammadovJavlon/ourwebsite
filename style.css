@@ -1,0 +1,241 @@
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    background: #000;
+    text-align: center;
+}
+
+body::before {
+    content: "";
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+
+.scene {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    perspective: 15px;
+    perspective-origin: 50% 50%;
+}
+
+.wrap {
+    position: absolute;
+    width: 1000px;
+    height: 1000px;
+    left: -500px;
+    top: -500px;
+    transform-style: preserve-3d;
+    animation: move 20s infinite linear;
+    animation-fill-mode: forwards;
+}
+
+.wrap:nth-child(2) {
+    animation: move 20s infinite linear;
+    animation-delay: 6s;
+}
+
+.wall {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background: url(https://poster.nicefon.ru/2016_09/15/1080x610/153861f0f0f8f4e0a2d2c0.jpg);
+    background-size: cover;
+    opacity: 0;
+    animation: fade 20s infinite linear;
+}
+
+.wrap:nth-child(2) .wall {
+    animation-delay: 6s;
+}
+
+.wall-right {
+    transform: rotateY(90deg) translateZ(500px);
+}
+
+.wall-left {
+    transform: rotateY(-90deg) translateZ(500px);
+}
+
+.wall-top {
+    transform: rotateX(90deg) translateZ(500px);
+}
+
+.wall-bottom {
+    transform: rotateX(-90deg) translateZ(500px);
+}
+
+.wall-back {
+    transform: rotateX(180deg) translateZ(500px);
+}
+
+@keyframes fade {
+    0% {
+        opacity: 0;
+    }
+
+    25% {
+        opacity: 1;
+    }
+
+    75% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes move {
+    0% {
+        transform: translateZ(-500px) rotate(0deg);
+    }
+
+    100% {
+        transform: translateZ(500px) rotate(0deg);
+    }
+}
+
+.player {
+    position: fixed;
+    bottom: 0;
+    left: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 50px 0;
+}
+
+.music-container {
+    background: #000000a8;
+    filter: blur(10%);
+    border-radius: 15px;
+    display: flex;
+    padding: 20px 30px;
+    position: relative;
+    z-index: 10;
+    margin-top: 40px;
+}
+
+.img-container {
+    position: relative;
+    width: 110px;
+}
+
+.img-container::after {
+    content: '';
+    height: 20px;
+    width: 20px;
+    position: absolute;
+    left: 50%;
+    bottom: 60%;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+}
+
+.img-container img {
+    width: inherit;
+    height: 110px;
+    border-radius: 50%;
+    object-fit: cover;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    animation: rotate 3s linear infinite;
+    animation-play-state: paused;
+}
+
+.player-title {
+    color: white;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.music-container.play .img-container img {
+    animation-play-state: paused;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg)
+    }
+
+    to {
+        transform: rotate(360deg)
+    }
+}
+
+.navigation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+}
+
+.action-btn {
+    background-color: transparent;
+    border: 1px solid black;
+    border-radius: 20px;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 10px;
+    margin: 0 20px;
+}
+
+.action-btn-big {
+    font-size: 30px;
+}
+
+.action-btn:focus {
+    outline: 0;
+}
+
+.music-info {
+    background: #ffffff8c;
+    border-radius: 15px 15px 0 0;
+    position: absolute;
+    top: 0;
+    left: 20px;
+    width: 90%;
+    padding: 10px 10px 10px 120px;
+    opacity: 0;
+    transform: translateY(0%);
+
+    transition: transform 0.3s ease-in opacity 0.3s ease-in;
+}
+.music-info h4{
+    margin: 0;
+}
+
+.music-container.play .music-info {
+    opacity: 1;
+    transform: translateY(-100%);
+}
+.progress-container{
+    background: black;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px 0;
+    height: 4px;
+    width: 100%;
+}
+.progress{
+    background: red;
+    border-radius: 5px;
+    height: 100%;
+    width: 0%;
+    transition: width 0.1s linear;
+}
