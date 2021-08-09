@@ -8,22 +8,25 @@ const progressContainer = document.querySelector('.progress-container');
 const title = document.querySelector('#title');
 const cover = document.querySelector('#cover');
 
+
+
 // Song titles
 const songs = ['13 reasons why','threnody','Tum Hi Ho'];
 
 // Keep track of songs
 let songIndex = 2;
 
+
 // Load song
 loadSong(songs[songIndex])
-
 // Update song details
 function loadSong(song) { 
     title.innerText= song;
     audio.src = `music/${song}.mp3`;
     cover.src = `images/${song}.jpg`;
  }
- 
+  
+  
 function playSong() { 
     musicContainer.classList.add('play');
     playBtn.querySelector('i.fas').classList.remove('fa-play');
@@ -92,3 +95,4 @@ audio.addEventListener('timeupdate', updateProgress);
 progressContainer.addEventListener('click',setProgress);
 
 audio.addEventListener('ended',nextSong);
+
