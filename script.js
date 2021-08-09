@@ -12,7 +12,7 @@ const cover = document.querySelector('#cover');
 const songs = ['13 reasons why','threnody','Tum Hi Ho'];
 
 // Keep track of songs
-let songIndex = 0;
+let songIndex = 2;
 
 // Load song
 loadSong(songs[songIndex])
